@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+data/
+exports/
+.env
+.DS_Store
+target/
+dbt_packages/
+logs/
+profiles.yml
+
