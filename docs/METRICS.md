@@ -8,7 +8,7 @@ Distinct users with app_open, view_item, add_to_cart, or purchase on a UTC calen
 
 ## Activation
 
-First view_item within the half-open 24-hour interval beginning at signup. Denominator: users who signed up on the cohort date. This demo's generated signup cohorts have completed that window; production datasets need explicit eligibility filtering for very recent signups.
+First view_item within the half-open 24-hour interval beginning at signup. Denominator: users who signed up on the cohort date and whose 24-hour window ends on or before the latest observed event timestamp. Recent signups with incomplete windows are excluded. The latest observed timestamp is a demonstration watermark; a production source should supply an explicit completeness signal.
 
 ## Conversion funnel
 
@@ -27,4 +27,3 @@ Grain: user_id and experiment_id. Columns preserve assignment, first matching ex
 Assignment uniqueness is checked in pipeline quality tests. An unexposed user is flagged rather than silently omitted. A zero purchase flag means no qualifying observed outcome, not necessarily a mature negative outcome; filter outcome_window_complete when interpreting exposed-window conversion.
 
 This is a data-preparation exercise. It is not a causal estimate, sample-ratio-mismatch analysis, power calculation, or production experiment decision.
-

@@ -45,6 +45,7 @@ def check(db_path=Path("data/analytics.db"), output=Path("exports")):
         generated = db.execute(candidate).fetchall()
         baseline = db.execute(reference).fetchall()
     checks = {
+        "nonempty_cohorts": bool(generated),
         "matches_reference_on_generated_data": generated == baseline,
         "independent_edge_case_fixture": fixture_check(candidate),
         "rates_within_zero_and_one": all(0 <= row[4] <= 1 for row in generated),

@@ -15,7 +15,7 @@ def export(db_path=Path("data/analytics.db"), output=Path("exports")):
             rows = cursor.fetchall()
             target = output / f"{path.stem}.csv"
             with target.open("w", newline="") as handle:
-                writer = csv.writer(handle)
+                writer = csv.writer(handle, lineterminator="\n")
                 writer.writerow([column[0] for column in cursor.description])
                 writer.writerows(rows)
             print(f"{target}: {len(rows)} rows")

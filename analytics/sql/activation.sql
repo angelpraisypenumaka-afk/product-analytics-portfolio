@@ -1,5 +1,10 @@
-WITH users AS (
-    SELECT user_id, signup_at FROM dim_users WHERE signup_at IS NOT NULL
+WITH observation AS (
+    SELECT MAX(event_timestamp) AS observed_through FROM events
+),
+users AS (
+    SELECT user_id, signup_at FROM dim_users CROSS JOIN observation
+    WHERE signup_at IS NOT NULL
+      AND julianday(signup_at) + 1 <= julianday(observed_through)
 ),
 activated AS (
     SELECT DISTINCT u.user_id
@@ -14,4 +19,3 @@ SELECT date(u.signup_at) AS signup_date,
        ROUND(1.0 * COUNT(a.user_id) / COUNT(*), 4) AS activation_rate
 FROM users u LEFT JOIN activated a USING(user_id)
 GROUP BY 1 ORDER BY 1;
-

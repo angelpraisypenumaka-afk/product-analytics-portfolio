@@ -1,12 +1,12 @@
 # Local Verification Record
 
-Verified in the build sandbox on October 16, 2026 using Python 3.14.3 and SQLite through Python's standard library. These observations describe the supplied synthetic dataset, not production performance or the learner's employment history.
+Verified in an isolated development environment on October 16, 2026 using Python 3.14.3 and SQLite through Python's standard library. These observations describe the synthetic dataset and local implementation, not production performance.
 
 ## Automated tests
 
-`python -m unittest discover -s tests -v` completed with 10 passing tests.
+`python -m unittest discover -s tests -v` completed with 16 passing tests with the optional plotting dependency installed.
 
-Coverage includes idempotent replay, quarantine deduplication, late-arriving records, repeatable backfills, conflicting event identifiers, invalid JSON, required fields, stale/future freshness failures, duplicate experiment assignment detection, CSV export, SQL candidate review, out-of-order funnel events, and missing experiment exposure.
+Coverage includes idempotent replay, quarantine deduplication, late-arriving records, repeatable backfills, conflicting event identifiers, invalid JSON, required fields, nonfinite property values, timezone and subsecond normalization, stale/future freshness failures, duplicate experiment assignment detection, CSV export, SQL candidate review, out-of-order funnel events, activation eligibility and boundaries, missing experiment exposure, a full demo run, and static chart export.
 
 ## Fresh database run
 
@@ -30,7 +30,9 @@ Coverage includes idempotent replay, quarantine deduplication, late-arriving rec
 | Experiment outcomes | 120 |
 | Session funnel | 1 |
 
-The AI-query review passed its four automated checks. Human review remains pending, and production approval remains false.
+The AI-query review passed its five automated checks. A deliberately incorrect retention query failed the expected-value fixture. Human review remains pending, and production approval remains false.
+
+The one-command demo and optional chart rendering completed successfully. Sample metric CSVs, a results report, a review report, and the rendered chart are committed under docs/evidence.
 
 ## Not verified here
 

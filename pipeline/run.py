@@ -58,11 +58,16 @@ def validate(row):
         return "invalid event_timestamp"
     if not isinstance(row.get("properties"), dict):
         return "properties must be an object"
+    try:
+        json.dumps(row["properties"], allow_nan=False)
+    except (ValueError, TypeError):
+        return "properties must contain valid finite JSON values"
     if row["event_name"] in {"experiment_assigned", "experiment_exposed"}:
         if not isinstance(row["properties"].get("experiment_id"), str) or not row["properties"]["experiment_id"]:
             return "experiment_id is required"
     if row["event_name"] == "experiment_assigned":
-        if row["properties"].get("variant") not in {"control", "treatment"}:
+        variant = row["properties"].get("variant")
+        if not isinstance(variant, str) or variant not in {"control", "treatment"}:
             return "unsupported experiment variant"
     return None
 
@@ -70,7 +75,7 @@ def validate(row):
 def normalized(row):
     return (
         row["event_id"], row["user_id"], row["session_id"], row["event_name"],
-        datetime.fromisoformat(row["event_timestamp"]).astimezone(timezone.utc).isoformat(),
+        datetime.fromisoformat(row["event_timestamp"]).astimezone(timezone.utc).isoformat(timespec="microseconds"),
         row["schema_version"], json.dumps(row["properties"], sort_keys=True),
     )
 

@@ -15,6 +15,23 @@ git --version
 
 If Windows recognizes `py` but not `python`, use `py` throughout. No pip install is required for the local version.
 
+## Run all three projects
+
+```bash
+python -m demo
+```
+
+The demo runs input generation, loading, quality checks, replay verification, metric exports, AI-query checks, and a generated results report. Outputs are saved under data/demo/exports. It is safe to rerun without duplicating accepted events.
+
+For the optional static charts:
+
+```bash
+python -m pip install -r requirements-viz.txt
+python -m demo --figures
+```
+
+Open data/demo/exports/product_analytics.png for the four-panel chart and results.md for the measured synthetic results. Committed sample outputs are also available under docs/evidence.
+
 ## Run the event pipeline
 
 ```bash
@@ -45,7 +62,7 @@ The automated tests also check late arrivals, repeatable backfills, event-ID con
 
 ### Make one meaningful change
 
-Add a new event type to the contract, generator, validator, and tests. Decide whether it counts toward engagement and explain why. This turns downloaded starter code into work you understand and have extended.
+Add a new event type to the contract, generator, validator, and tests. Decide whether it counts toward engagement and explain why. This provides a concrete extension you can explain and validate.
 
 Commit it:
 

@@ -1,0 +1,18 @@
+{
+  "automated_checks": {
+    "nonempty_cohorts": true,
+    "matches_reference_on_generated_data": true,
+    "independent_edge_case_fixture": true,
+    "rates_within_zero_and_one": true,
+    "retained_not_above_eligible": true
+  },
+  "automated_status": "PASS",
+  "human_review_status": "PENDING",
+  "production_approved": false,
+  "limitations": [
+    "Synthetic fixtures are not a production correctness guarantee.",
+    "The reference and candidate were supplied in the same AI-assisted build.",
+    "Read-only SQLite is a guardrail, not an untrusted-code sandbox.",
+    "No AI service is called by this command."
+  ]
+}

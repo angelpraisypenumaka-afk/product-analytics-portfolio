@@ -2,7 +2,7 @@
 
 ## Provenance
 
-The initial repository and candidate SQL were created with AI assistance in this conversation. The learner still needs to inspect and approve the code. The review report deliberately starts with human_review_status=PENDING and production_approved=false.
+Development of the initial implementation and candidate SQL used AI assistance. Human approval has not yet been recorded. The review report deliberately starts with human_review_status=PENDING and production_approved=false.
 
 No AI API is called by the application. The project demonstrates reviewing an AI-authored artifact, not building an autonomous coding agent.
 
@@ -40,4 +40,3 @@ Do not change production_approved to true simply because automated checks passed
 ## Measuring a workflow improvement
 
 Time one comparable SQL task manually and one AI-assisted task, including review and rework. Keep the same correctness criteria and record failures. Report only your observed results; the repository does not claim an efficiency percentage.
-

@@ -10,9 +10,9 @@ All records are synthetic JSON objects stored one per line. No emails, names, de
 | user_id | String | Nonempty; synthetic identifier |
 | session_id | String | Nonempty; session grain is user_id plus session_id |
 | event_name | String | signup, app_open, view_item, add_to_cart, purchase, experiment_assigned, experiment_exposed |
-| event_timestamp | String | ISO timestamp with timezone; normalized to UTC on load |
+| event_timestamp | String | ISO timestamp with timezone; normalized to UTC with fixed microsecond precision on load |
 | schema_version | Integer | Exactly 1; booleans are rejected |
-| properties | Object | JSON object; experiment events require experiment_id; assignments require control or treatment variant |
+| properties | Object | Finite JSON values; experiment events require experiment_id; assignments require control or treatment variant |
 
 ## Replay and rejection behavior
 
@@ -31,4 +31,3 @@ All records are synthetic JSON objects stored one per line. No emails, names, de
 - fact_sessions: one user_id/session_id combination.
 - quarantine: one unique rejected raw record.
 - pipeline_runs: one successful load attempt that reaches quality evaluation, including attempts with failed quality checks.
-
